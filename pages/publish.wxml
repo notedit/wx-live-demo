@@ -6,7 +6,7 @@
     <image style="width: 60rpx; height: 60rpx;display:inline-block; position:absolute;right:20rpx;margin-top:25rpx;" src="./Resources/QR_code.png" bindtap='onScanQR'></image>
   </view> 
 
-  <view style="width:100%; height:calc(100vh - 110rpx);">
+  <view style="width:100%; height:{{playing?'100vh':'calc(100vh - 110rpx)'}};">
   
     <live-pusher
       style="width:100%; height: 100%;"
