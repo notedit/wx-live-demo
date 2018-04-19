@@ -9,6 +9,7 @@ Page({
     playing: false,
     frontCamera: true,
     cameraContext: {},
+    playerContext: {},
     pushUrl: "",
     showHDTips: false, //显示清晰度弹窗
     mode: "HD",
@@ -95,8 +96,8 @@ Page({
       this.data.beauty = 0;
       this.data.whiteness = 0;
     } else {
-      this.data.beauty = 6.3;
-      this.data.whiteness = 3.0;
+      this.data.beauty = 8.0;
+      this.data.whiteness = 4.0;
     }
 
     this.setData({
@@ -180,6 +181,29 @@ Page({
         title: '推流多次失败',
       })
     }
+
+    // 已经推流成功
+    if (e.detail.code == 1002){
+      wx.showToast({
+        title: '推流成功',
+      })
+
+      this.setData({
+        playUrl:this.data.pushUrl
+      });
+
+      console.log(this.data.pushUrl);
+
+      this.data.playerContext.play();
+
+      
+    }
+  },
+
+  onPlayEvent: function(e) {
+
+    console.log('onPlayEvent', e);
+
   },
 
   stop: function () {
@@ -203,6 +227,15 @@ Page({
     })
   },
 
+  createPlayerContext: function() {
+
+    this.setData({
+      playerContext: wx.createLivePlayerContext('video-livePlayer', this)
+    });
+
+    console.log('playercontext ', this.data.playerContext);
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -217,6 +250,8 @@ Page({
     console.log("onLoad onReady");
     this.createContext();
 
+    this.createPlayerContext();
+    
     wx.setKeepScreenOn({
       keepScreenOn: true,
     })
