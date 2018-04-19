@@ -29,7 +29,7 @@
     </live-pusher> 
 
  <live-player
-      style="width: 45vw; height: 45vw; margin-left:25vw;"
+      style="width: 45vw; height: 45vw; margin-left:25vw; margin-top:3vw;"
       id="video-livePlayer"
       mode="RTC"
       autoplay
